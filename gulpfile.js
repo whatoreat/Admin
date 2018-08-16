@@ -102,7 +102,7 @@ gulp.task('browserSync', function() {
 });
 
 // Dev task
-gulp.task('dev', ['css', 'js', 'browserSync'], function() {
+gulp.task('dev', ['css', 'browserSync'], function() {
   gulp.watch('./scss/*.scss', ['css']);
   // gulp.watch('./js/*.js', ['js']);
   gulp.watch('./*.html', browserSync.reload);

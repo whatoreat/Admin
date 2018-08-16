@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>Whatoreat - Admin</title>
 
   <!-- Bootstrap core CSS -->
   <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -22,31 +22,57 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/clean-blog.min.css" rel="stylesheet">
+  <link href="css/index.min.css" rel="stylesheet">
 
 </head>
 
 <body>
 
+  <div class="row authorizationDiv ">
 
-
-  <h1 id="status">DEFAULT</h1>
-  <button id="btnGoogleSignIn">Google Sign In</button>
-  <button id="btnSignOut">Sign Out</button>
-
-
-  <div>
-    <h1>Generate New ID for new Post</h1>
-    <button id="getNewPostID">Generate</button>
-    <p>New Post ID :
-      <a id="newPostID">None</a>
-    </p>
+    <div class="col-md-8">
+      <h3 class=" text-center">Account is now &nbsp;&nbsp;&nbsp;<a id="status">DEFAULT</a></h3>
+    </div>
+    <div class="col-md-4">
+      <button id="btnGoogleSignIn">Google Sign In</button>
+      <button id="btnSignOut">Sign Out</button>
+    </div>
   </div>
 
-  <div>
-    <h1>Upload HTML</h1>
-    <input type="file" id="selectedHTML" />
-    <button id="uploadHTML">Upload HTML</button>
+  <div class="generateNewIDDiv col-md-12">
+    <div class="text-center">
+      <h1>Generate New ID for new Post</h1>
+    </div>
+    <div class="text-center">
+      <button id="getNewPostID" class="generateButton badButton">Generate</button>
+      <p> Post ID :
+        <a id="newPostID" class="col-md-2 offset-md-1">None</a>
+      </p>
+    </div>
+
+    <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgGenerateID" style="visibility:hidden">
+      <strong>Danger!</strong> Already Generated. Do you want to generate a new ID?
+      <div><button type="button" id="bypassButton" class="btn btn-primary">YES</button></div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-12 uploadHTMLDiv">
+    <div>
+      <div class="text-center">
+        <h1>Upload HTML</h1>
+      </div>
+      <div class="text-center">
+        <input type="file" id="selectedHTML" />
+      </div>
+      <div class="text-center">
+        <button id="uploadHTML" class="btn btn-primary">Upload HTML</button>
+      </div>
+    </div>
+    <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgUploadHTML" style="visibility:hidden">
+      <strong>Danger!</strong> No Post ID selected or generated!
+    </div>
 
   </div>
 
@@ -55,12 +81,6 @@
     <input type="file" id="selectedIMG" multiple="multiple" />
     <button id="upload">Upload</button>
   </div>
-
-
-
-
-
-
 
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script>
@@ -74,7 +94,6 @@
       messagingSenderId: "428939449769"
     };
     firebase.initializeApp(config);
-    console.log(firebase)
   </script>
   <script src="./js/index.js"></script>
 

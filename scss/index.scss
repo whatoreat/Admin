@@ -1,0 +1,55 @@
+@import "variables.scss";
+@import "mixins.scss";
+@import "global.scss";
+@import "navbar.scss";
+@import "masthead.scss";
+@import "post.scss";
+@import "contact.scss";
+@import "footer.scss";
+@import "bootstrap-overrides.scss";
+
+.authorizationDiv {
+  padding-top: 1rem !important;
+  margin: 1rem;
+  vertical-align: middle;
+}
+
+.generateNewIDDiv {
+  margin: 3rem 1rem 1rem !important;
+
+  .generateButton {
+    /* Green */
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .goodButton {
+    background-color: green;
+    color: white;
+  }
+
+  .badButton {
+    background-color: red !important;
+    color: white;
+  }
+}
+
+.uploadHTMLDiv {
+  margin: 3rem 1rem 1rem !important;
+
+  #errorMsgUploadHTML {
+    margin-top: 1rem !important;
+  }
+
+  #selectedHTML {
+    margin-top: 1rem !important;
+  }
+
+  #uploadHTML {
+    margin-top: 1rem !important;
+  }
+}

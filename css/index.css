@@ -418,3 +418,49 @@ footer .copyright {
   font-size: 16px;
   padding: 25px 35px;
 }
+
+.authorizationDiv {
+  padding-top: 1rem !important;
+  margin: 1rem;
+  vertical-align: middle;
+}
+
+.generateNewIDDiv {
+  margin: 3rem 1rem 1rem !important;
+}
+
+.generateNewIDDiv .generateButton {
+  /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.generateNewIDDiv .goodButton {
+  background-color: green;
+  color: white;
+}
+
+.generateNewIDDiv .badButton {
+  background-color: red !important;
+  color: white;
+}
+
+.uploadHTMLDiv {
+  margin: 3rem 1rem 1rem !important;
+}
+
+.uploadHTMLDiv #errorMsgUploadHTML {
+  margin-top: 1rem !important;
+}
+
+.uploadHTMLDiv #selectedHTML {
+  margin-top: 1rem !important;
+}
+
+.uploadHTMLDiv #uploadHTML {
+  margin-top: 1rem !important;
+}

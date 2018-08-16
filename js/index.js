@@ -8,6 +8,10 @@
   document.getElementById("getNewPostID").addEventListener("click", getNewPostID);
   document.getElementById("upload").addEventListener("click", uploadIMG);
   document.getElementById("uploadHTML").addEventListener("click", uploadHTML);
+  document.getElementById("bypassButton").addEventListener("click", getNewPostID_);
+
+  var currentPostHash = null;
+
 
   const auth = firebase.auth();
   // console.log(auth);
@@ -25,9 +29,30 @@
     });
   }
 
-  function getNewPostID() {
+  function getNewPostID_() {
+    getNewPostID(false)
+  }
+
+  function getNewPostID(bypass = false) {
+
+
+    if (document.getElementById("getNewPostID").classList.contains("goodButton") && bypass) {
+      document.getElementById("errorMsgGenerateID").style.visibility = "visible";
+      return;
+    }
+
+    // bypass, comfirm to generate new one
+    // or firstTime
+    // set to default
+    document.getElementById("errorMsgGenerateID").style.visibility = "hidden";
+    document.getElementById("getNewPostID").classList.add("badButton");
     httpRESTAsync("GET", "https://us-central1-whatoreat-testdb.cloudfunctions.net/createNewPost", null, function(res) {
-      document.getElementById("newPostID").innerHTML = res;
+      if (res) {
+        document.getElementById("newPostID").innerHTML = res;
+        currentPostHash = res;
+        document.getElementById("getNewPostID").classList.add("goodButton");
+        document.getElementById("getNewPostID").classList.remove("badButton");
+      }
     })
   }
 
@@ -59,13 +84,16 @@
 
 
   async function uploadIMG() {
-    var postID = document.getElementById("newPostID").innerHTML;
+    if (!currentPostHash) {
+      console.log("Er")
+      return;
+    }
     var Filelist = document.getElementById("selectedIMG").files;
 
     var numberOfFile = Filelist.length;
 
     var data = {
-      fileName: postID,
+      fileName: currentPostHash,
       fileContent: {}
     }
 
@@ -90,16 +118,18 @@
   }
 
   function uploadHTML() {
-    console.log("EEEEE")
-
-    var postID = document.getElementById("newPostID").innerHTML;
+    if (!currentPostHash) {
+      console.log("Er")
+      document.getElementById("errorMsgUploadHTML").style.visibility = "visible"
+      return;
+    }
     var html = document.getElementById("selectedHTML").files[0];
 
     var reader = new FileReader();
     reader.onload = function() {
       var dataURL = reader.result;
       var data = {
-        fileName: postID,
+        fileName: currentPostHash,
         fileContent: dataURL
       }
       console.log(data)
@@ -126,6 +156,8 @@
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
+      else
+        callback(null);
     }
     xmlHttp.open(type, theUrl, true); // true for asynchronous
     if (type == "POST") {
