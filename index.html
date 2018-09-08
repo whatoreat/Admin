@@ -50,36 +50,46 @@
       </p>
     </div>
 
+    <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgAuth" style="visibility:hidden">
+      <small><strong>Danger!</strong> Not Signed In</samll>
+    </div>
     <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgGenerateID" style="visibility:hidden">
-      <strong>Danger!</strong> Already Generated. Do you want to generate a new ID?
+      <small><strong>Danger!</strong> Already Generated. Do you want to generate a new ID?</samll>
       <div><button type="button" id="bypassButton" class="btn btn-primary">YES</button></div>
 
     </div>
 
   </div>
 
-  <div class="col-md-12 uploadHTMLDiv">
-    <div>
-      <div class="text-center">
-        <h1>Upload HTML</h1>
+  <div class="row">
+    <div class="col-md-6 uploadHTMLDiv">
+      <div>
+        <div class="text-center">
+          <h1>Upload HTML</h1>
+        </div>
+        <div class="text-center">
+          <input type="file" id="selectedHTML" /> <button id="uploadHTML" class="btn btn-primary">Upload HTML</button>
+        </div>
       </div>
-      <div class="text-center">
-        <input type="file" id="selectedHTML" />
+      <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgUploadHTML" style="visibility:hidden">
+        <strong>Danger!</strong> No Post ID selected or generated!
       </div>
-      <div class="text-center">
-        <button id="uploadHTML" class="btn btn-primary">Upload HTML</button>
-      </div>
-    </div>
-    <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgUploadHTML" style="visibility:hidden">
-      <strong>Danger!</strong> No Post ID selected or generated!
+
     </div>
 
-  </div>
+    <div class="col-md-6 text-center uploadImageDiv">
+      <div class="text-center">
+          <h1>Upload Images</h1>
+      </div>
 
-  <div>
-    <h1>Upload Images</h1>
-    <input type="file" id="selectedIMG" multiple="multiple" />
-    <button id="upload">Upload</button>
+      <input type="file" id="selectedIMG" multiple="multiple" />
+      <button id="upload" class="btn btn-primary">Upload Image(s)</button>
+
+      <div class="alert alert-danger text-center offset-md-3 col-md-6" id="errorMsgUploadImage" style="visibility:hidden">
+        <strong>Danger!</strong> No Post ID selected or generated!
+      </div>
+
+    </div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>

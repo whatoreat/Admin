@@ -11,7 +11,9 @@
   document.getElementById("bypassButton").addEventListener("click", getNewPostID_);
 
   var currentPostHash = null;
-
+  var uid = "r9kPmxk6heWK2lf5TCdCIEFkqXB2";
+  var userEmail = "chenliyang1024@gmail.com";
+  var userSignedIn = false;
 
   const auth = firebase.auth();
   // console.log(auth);
@@ -35,8 +37,14 @@
 
   function getNewPostID(bypass = false) {
 
+    if (!userSignedIn) {
+      document.getElementById("errorMsgAuth").style.visibility = "visible";
+      return;
+    }
+
 
     if (document.getElementById("getNewPostID").classList.contains("goodButton") && bypass) {
+      document.getElementById("errorMsgAuth").style.visibility = "hidden";
       document.getElementById("errorMsgGenerateID").style.visibility = "visible";
       return;
     }
@@ -86,6 +94,7 @@
   async function uploadIMG() {
     if (!currentPostHash) {
       console.log("Er")
+      document.getElementById("errorMsgUploadImage").style.visibility = "visible"
       return;
     }
     var Filelist = document.getElementById("selectedIMG").files;
@@ -143,12 +152,35 @@
 
 
   auth.onAuthStateChanged(function(user) {
+
+
     if (user) {
-      console.log(user);
       document.getElementById("status").innerHTML = "IN";
+      userSignedIn = true;
     } else {
       document.getElementById("status").innerHTML = "OUT";
+      userSignedIn = false;
     }
+
+    auth.getRedirectResult().then(function(result) {
+      if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        if (result.user.uid != uid || result.additionalUserInfo.profile.email != userEmail) {
+          auth.signOut().then(function() {
+            // Sign-out successful.
+          }).catch(function(error) {
+            // An error happened.
+          });
+        } else {
+          userSignedIn = true;
+        }
+      }
+    }).catch(function(error) {
+
+    });
+
+
+
   })
 
   function httpRESTAsync(type, theUrl, data, callback) {

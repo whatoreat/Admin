@@ -449,10 +449,6 @@ footer .copyright {
   color: white;
 }
 
-.uploadHTMLDiv {
-  margin: 3rem 1rem 1rem !important;
-}
-
 .uploadHTMLDiv #errorMsgUploadHTML {
   margin-top: 1rem !important;
 }
@@ -462,5 +458,17 @@ footer .copyright {
 }
 
 .uploadHTMLDiv #uploadHTML {
+  margin-top: 1rem !important;
+}
+
+.uploadImageDiv #errorMsgUploadImage {
+  margin-top: 1rem !important;
+}
+
+.uploadImageDiv #selectedIMG {
+  margin-top: 1rem !important;
+}
+
+.uploadImageDiv #upload {
   margin-top: 1rem !important;
 }

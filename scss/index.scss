@@ -39,8 +39,7 @@
 }
 
 .uploadHTMLDiv {
-  margin: 3rem 1rem 1rem !important;
-
+  // margin: 3rem 1rem 1rem !important;
   #errorMsgUploadHTML {
     margin-top: 1rem !important;
   }
@@ -50,6 +49,21 @@
   }
 
   #uploadHTML {
+    margin-top: 1rem !important;
+  }
+}
+
+.uploadImageDiv {
+  // margin: 3rem 1rem 1rem !important;
+  #errorMsgUploadImage {
+    margin-top: 1rem !important;
+  }
+
+  #selectedIMG {
+    margin-top: 1rem !important;
+  }
+
+  #upload {
     margin-top: 1rem !important;
   }
 }
