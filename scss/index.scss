@@ -36,6 +36,53 @@
     background-color: red !important;
     color: white;
   }
+
+  #snapshotDiv {
+    margin-top: 1rem;
+
+    textarea {
+      resize: none !important;
+      border: 1px solid;
+      width: 60rem;
+      padding-left: 1rem;
+    }
+
+    textarea::placeholder {
+      padding-left: 1rem;
+    }
+  }
+
+  #detailDiv {
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+    input {
+      border: 1px solid;
+      margin-left: 2rem;
+      height: 3rem;
+      padding-left: 1rem;
+    }
+
+    input::placeholder {
+      padding-left: 1rem;
+    }
+
+    .titleInput {
+      width: 30rem;
+    }
+  }
+
+  #saveNewPostDetail {
+    margin-top: 1rem;
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .detailBlock {
+    padding-top: 1rem;
+    padding-bottom:: 1rem;
+    // background-color: black;
+  }
 }
 
 .uploadHTMLDiv {

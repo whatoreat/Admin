@@ -1,4 +1,23 @@
 (function() {
+
+
+  window.onbeforeunload = function(evt) {
+    if (currentPostHash) {
+      var message = 'Are you sure you want to leave?';
+      if (typeof evt == 'undefined') {
+        evt = window.event;
+      }
+      if (evt) {
+
+        evt.returnValue = message;
+      }
+      return message;
+    } else {
+      return;
+    }
+  }
+
+
   console.log("ERERE");
 
   document.getElementById("btnGoogleSignIn").addEventListener("click", loginWithGoogle);
@@ -9,6 +28,9 @@
   document.getElementById("upload").addEventListener("click", uploadIMG);
   document.getElementById("uploadHTML").addEventListener("click", uploadHTML);
   document.getElementById("bypassButton").addEventListener("click", getNewPostID_);
+  document.getElementById("saveNewPostDetail").addEventListener("click", uploadDetails);
+
+
 
   var currentPostHash = null;
   var uid = "r9kPmxk6heWK2lf5TCdCIEFkqXB2";
@@ -53,6 +75,7 @@
     // or firstTime
     // set to default
     document.getElementById("errorMsgGenerateID").style.visibility = "hidden";
+    document.getElementById("detailBlock").style.display = "none";
     document.getElementById("getNewPostID").classList.add("badButton");
     httpRESTAsync("GET", "https://us-central1-whatoreat-testdb.cloudfunctions.net/createNewPost", null, function(res) {
       if (res) {
@@ -60,34 +83,32 @@
         currentPostHash = res;
         document.getElementById("getNewPostID").classList.add("goodButton");
         document.getElementById("getNewPostID").classList.remove("badButton");
+        document.getElementById("detailBlock").style.display = "flex";
       }
     })
   }
 
-  function uploadIMG2() {
-    var postID = document.getElementById("newPostID").innerHTML;
-    if (postID !== "None") {
-      var storageRef = firebase.storage().ref();
-      var spaceRef = storageRef.child(postID);
-      var Filelist = document.getElementById("selectedIMG").files;
-      var lengthOfImages = Filelist.length;
-      if (lengthOfImages == 0) {
-        console.log("No files")
-        return
-      }
-      var counter = 0;
-      for (count = 0; count < lengthOfImages; count++) {
-        var spaceRef = storageRef.child(postID + "/" + Filelist[count].name);
-        spaceRef.put(Filelist[count]).then(function(snapshot) {
-          counter++;
-          if (counter == lengthOfImages) {
-            console.log('Uploaded done');
-          }
-        });
-      }
-    } else {
-      alert("Create Post First")
+  function uploadDetails() {
+
+    var author = document.getElementById("author").value;
+    var title = document.getElementById("title").value;
+    var snapshot = document.getElementById("snapshot").value;
+
+    console.log(author, title, snapshot)
+    var data = {
+      fileName: currentPostHash,
+      author: author,
+      title: title,
+      snapshot: snapshot
     }
+    console.log(data)
+    if (auth && title && snapshot) {
+      httpRESTAsync("POST", "https://us-central1-whatoreat-testdb.cloudfunctions.net/newPostSnapShot", data, function(res) {
+        console.log(JSON.parse(res));
+      })
+    }
+
+
   }
 
 
